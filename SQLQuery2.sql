@@ -1,6 +1,8 @@
 use SAMPLEDB
 GO
 
+--Basic Queries
+
 select *from [hcm].[employees]
 
 select first_name,
@@ -53,22 +55,26 @@ from[hcm].[employees]
 
 select * from [oes].[products]
 
-select *             --/list price greater than 100
+--/list price greater than 100
+select *             
 from[oes].[products]
 where list_price >100; 
 
 
 select * from [oes].[orders]
 
- select *  --//orders not delivered i.e null in shipped 
- from[oes].[orders]
- where  shipped_date is NULL;
+--//orders not delivered i.e null in shipped 
+select *  
+from[oes].[orders]
+where  shipped_date is NULL;
 
-  select * --//to select on particular date ordered product
+--//to select on particular date ordered product
+  select * 
  from[oes].[orders]
  where order_date = '20200226';
 
-  select * --// Orders on or after Jan 01 2020
+ --// Orders on or after Jan 01 2020
+  select * 
  from[oes].[orders]
  where order_date >= '20200101';
 
@@ -81,35 +87,43 @@ select * from [oes].[orders]
  ORDER_DATE BETWEEN '20200101' AND'20201201' 
  ORDER BY order_date asc;
 
- select Year(order_date) AS Year ,--Number of orders on and after Jan 2020( doing as extra on 12/08/2024)
- Month(order_date) AS Month,  --Semi Intermediate level 
+--Number of orders on and after Jan 2020( doing as extra on 12/08/2024)
+--Semi Intermediate level
+ select Year(order_date) AS Year ,
+ Month(order_date) AS Month,   
  count(*) AS order_count
  from[oes].[orders] 
  where order_date >= '20200101'
  Group By Year(order_date),Month(order_date)
  Order By Month,Year asc;
 
- select*from sys.fn_helpcollations(); --  To look at all Collatations in sql server
+ --  To look at all Collatations in sql server
+ select*from sys.fn_helpcollations(); 
 
-  select*from INFORMATION_SCHEMA.COLUMNS -- To see the schema information (AIM:to see the collatation of schema)
+ -- To see the schema information (AIM:to see the collatation of schema)
+  select*from INFORMATION_SCHEMA.COLUMNS 
   WHERE table_schema='oes' and table_name='products' ; 
 
 --Collation Levels(https://www.geeksforgeeks.org/sql-server-collation/)
 
-
-select*from [oes].[products]  -- using wildcard '%' to get product names starting with Apple
+-- using wildcard '%' to get product names starting with Apple
+select*from [oes].[products]  
 where product_name like 'Apple%';
 
-select*from [oes].[products]  -- using wildcard '%' to get product names ending  with card
+-- using wildcard '%' to get product names ending  with card
+select*from [oes].[products] 
 where product_name like '%Card';
 
-select*from [oes].[products] --(_)can have single wildcard character before then n (%)then anything from 0 to characters
+--(_)can have single wildcard character before then n (%)then anything from 0 to characters
+select*from [oes].[products] 
 where product_name like '_n%';
 
-select*from [oes].[products]  -- Return products name that have number (0-9) as end
+-- Return products name that have number (0-9) as end
+select*from [oes].[products]  
 where product_name like '%[0-9]';
 
-select*from [oes].[products]  --1st letter 2nd number
+--1st letter 2nd number
+select*from [oes].[products] 
 where product_name like '[A-Z][0-9]%';
 
 ----Entry on 20-08-2024 Learning Git and Github for sql server learing (learing to push sql code via Git bash)
