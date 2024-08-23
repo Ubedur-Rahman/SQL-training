@@ -87,15 +87,6 @@ where  shipped_date is NULL;
  ORDER_DATE BETWEEN '20200101' AND'20201201' 
  ORDER BY order_date asc;
 
---Number of orders on and after Jan 2020( doing as extra on 12/08/2024)
---Semi Intermediate level
- select Year(order_date) AS Year ,
- Month(order_date) AS Month,   
- count(*) AS order_count
- from[oes].[orders] 
- where order_date >= '20200101'
- Group By Year(order_date),Month(order_date)
- Order By Month,Year asc;
 
  --  To look at all Collatations in sql server
  select*from sys.fn_helpcollations(); 
@@ -147,4 +138,28 @@ select Product_name
 from[oes].[products]
 where product_name like '%[0-9]';
 
+select*from[oes].[orders] where employee_id is not null
+order by employee_id asc ;
 
+--Shipping Cost (Valid Shipments) by Employee
+select
+employee_id,
+count(shipper_id) as Total_Shippments,
+sum(freight_cost) as Total_Shipping_Cost
+from[oes].[orders] where employee_id is not null
+Group By Employee_id
+order by employee_id ;
+
+--Total shipping cost by shipper
+select
+shipper_id,
+sum(freight_cost) as Total_Shipping_Cost
+from[oes].[orders] where employee_id is not null
+Group By shipper_id
+order by shipper_id ;
+
+--Total population by locality
+select locality,
+sum(Population_count) AS Total_Population
+from[bird].[antarctic_populations] 
+Group by locality;
