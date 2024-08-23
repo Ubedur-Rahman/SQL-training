@@ -2,8 +2,7 @@
 -- Script that creates the sample database SAMPLEDB
 
 
--- © Daniel Tait
---Last updated 20210122
+
 ---------------------------------------------------------------------
 
 
