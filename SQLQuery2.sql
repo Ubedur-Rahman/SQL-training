@@ -147,3 +147,4 @@ select Product_name
 from[oes].[products]
 where product_name like '%[0-9]';
 
+
