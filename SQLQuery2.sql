@@ -100,7 +100,7 @@ where  shipped_date is NULL;
  --  To look at all Collatations in sql server
  select*from sys.fn_helpcollations(); 
 
- -- To see the schema information (AIM:to see the collatation of schema)
+ -- To see the schema information (meta data view) 
   select*from INFORMATION_SCHEMA.COLUMNS 
   WHERE table_schema='oes' and table_name='products' ; 
 
@@ -126,4 +126,24 @@ where product_name like '%[0-9]';
 select*from [oes].[products] 
 where product_name like '[A-Z][0-9]%';
 
-----Entry on 20-08-2024 Learning Git and Github for sql server learing (learing to push sql code via Git bash)
+----Entry 20-08-2024 Git and Github for sql server(updates and pushing sql code via Git bash)
+
+--To select from countries letter starting with N
+  select *from[hcm].[countries]
+  where country_name Like 'N%';
+
+--customers who have Gmail
+select customer_id,first_name, Email
+from[oes].[customers]
+where email like '%@gmail.com';
+
+--Products with mouse name in it
+select product_name 
+from[oes].[products]
+where product_name like '%mouse%';
+
+--Product name that end with a number
+select Product_name 
+from[oes].[products]
+where product_name like '%[0-9]';
+
